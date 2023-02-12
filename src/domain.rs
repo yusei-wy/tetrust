@@ -61,3 +61,8 @@ pub const BLOCKS: [BlockShape; 7] = [
         [0, 0, 0, 0],
     ],
 ];
+
+pub struct Position {
+    pub x: usize,
+    pub y: usize,
+}

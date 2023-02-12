@@ -27,29 +27,33 @@ fn main() {
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ];
 
-    // generate field for render
-    let mut field_buf = field;
-    for y in 0..4 {
-        for x in 0..4 {
-            field_buf[y + 2][x + 2] = BLOCKS[BlockKind::I as usize][y][x];
-            field_buf[y + 2][x + 7] = BLOCKS[BlockKind::O as usize][y][x];
-            field_buf[y + 6][x + 2] = BLOCKS[BlockKind::S as usize][y][x];
-            field_buf[y + 6][x + 7] = BLOCKS[BlockKind::Z as usize][y][x];
-            field_buf[y + 10][x + 2] = BLOCKS[BlockKind::J as usize][y][x];
-            field_buf[y + 10][x + 7] = BLOCKS[BlockKind::L as usize][y][x];
-            field_buf[y + 14][x + 2] = BLOCKS[BlockKind::T as usize][y][x];
-        }
-    }
+    let mut pos = Position { x: 4, y: 0 };
 
-    // render field
-    for y in 0..21 {
-        for x in 0..13 {
-            if field_buf[y][x] == 1 {
-                print!("[]");
-            } else {
-                print!(" .");
+    // drop 5 squares
+    for _ in 0..5 {
+        // generate field for render
+        let mut field_buf = field;
+        for y in 0..4 {
+            for x in 0..4 {
+                if BLOCKS[BlockKind::I as usize][y][x] == 1 {
+                    field_buf[y + pos.y][x + pos.x] = 1;
+                }
             }
         }
-        println!();
+
+        // update y pos
+        pos.y += 1;
+
+        // render field
+        for y in 0..21 {
+            for x in 0..13 {
+                if field_buf[y][x] == 1 {
+                    print!("[]");
+                } else {
+                    print!(" .");
+                }
+            }
+            println!();
+        }
     }
 }
