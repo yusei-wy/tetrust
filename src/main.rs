@@ -1,6 +1,6 @@
-mod domain;
+mod entity;
 
-use domain::*;
+use entity::*;
 
 fn main() {
     let field = [
