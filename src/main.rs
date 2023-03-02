@@ -2,6 +2,20 @@ mod entity;
 
 use entity::*;
 
+// TODO: enum でリストしてコマンドにしたい
+// CSI シーケンスによって端末を操作している
+fn clear_screen() {
+    println!("\x1b[2J\x1b[H\x1b[?25l");
+}
+
+fn clear_cursor_pos() {
+    print!("\x1b[H");
+}
+
+fn hide_cursor() {
+    println!("\x1b[?25h");
+}
+
 fn main() {
     let field = [
         [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -29,6 +43,8 @@ fn main() {
 
     let mut pos = Position { x: 4, y: 0 };
 
+    clear_screen();
+
     // drop 5 squares
     for _ in 0..5 {
         // generate field for render
@@ -45,6 +61,7 @@ fn main() {
         pos.y += 1;
 
         // render field
+        clear_cursor_pos();
         for y in 0..21 {
             for x in 0..13 {
                 if field_buf[y][x] == 1 {
@@ -56,4 +73,6 @@ fn main() {
             println!();
         }
     }
+
+    hide_cursor();
 }
