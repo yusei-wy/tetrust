@@ -1,4 +1,5 @@
 mod entity;
+use std::{thread, time};
 
 use entity::*;
 
@@ -72,6 +73,8 @@ fn main() {
             }
             println!();
         }
+
+        thread::sleep(time::Duration::from_millis(1000));
     }
 
     hide_cursor();
