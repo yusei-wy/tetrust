@@ -13,7 +13,7 @@ fn clear_cursor_pos() {
     print!("\x1b[H");
 }
 
-fn hide_cursor() {
+fn show_cursor() {
     println!("\x1b[?25h");
 }
 
@@ -77,5 +77,5 @@ fn main() {
         thread::sleep(time::Duration::from_millis(1000));
     }
 
-    hide_cursor();
+    show_cursor();
 }
