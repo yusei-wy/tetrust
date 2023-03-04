@@ -1,3 +1,9 @@
+pub const FIELD_WIDTH: usize = 11 + 2; // field + wall
+pub const FIELD_HEIGHT: usize = 20 + 1; // field + bottom
+
+pub type Field = [[usize; FIELD_WIDTH]; FIELD_HEIGHT];
+
+#[derive(Clone, Copy)]
 pub enum BlockKind {
     I,
     O,
