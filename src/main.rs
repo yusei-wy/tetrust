@@ -77,16 +77,16 @@ fn main() {
 
         // render field
         clear_cursor_pos();
-        for y in 0..FIELD_HEIGHT {
-            for x in 0..FIELD_WIDTH {
+        (0..FIELD_HEIGHT).for_each(|y| {
+            (0..FIELD_WIDTH).for_each(|x| {
                 if field_buf[y][x] == 1 {
                     print!("[]");
                 } else {
                     print!(" .");
                 }
-            }
+            });
             println!();
-        }
+        });
 
         thread::sleep(time::Duration::from_millis(1000));
     }
