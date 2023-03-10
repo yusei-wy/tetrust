@@ -1,4 +1,5 @@
 mod entity;
+use getch_rs::{Getch, Key};
 use std::{thread, time};
 
 use entity::*;
@@ -54,11 +55,11 @@ fn main() {
     ];
 
     let mut pos = Position { x: 4, y: 0 };
+    let g = Getch::new();
 
     clear_screen();
 
-    // drop 30 squares
-    for _ in 0..30 {
+    loop {
         // generate field for render
         let mut field_buf = field;
         if !is_collision(&field, &pos, BlockKind::I) {
@@ -89,6 +90,12 @@ fn main() {
         });
 
         thread::sleep(time::Duration::from_millis(1000));
+
+        // quit by typing `q`
+        match g.getch() {
+            Ok(Key::Char('q')) => break,
+            _ => (),
+        }
     }
 
     show_cursor();
